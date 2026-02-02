@@ -11,3 +11,16 @@ html{
 .main-content{
  flex: 1;
 }
+
+.custom-hero-bg {
+  background-image: url("./assets/beach.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: blur(3px);
+ 
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

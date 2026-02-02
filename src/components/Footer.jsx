@@ -5,7 +5,7 @@ const Footer = () => {
   const year = data.getFullYear();
 
   return (
-    <Container fluid className="bg-body-tertiary text-center">
+    <Container fluid className="bg-primary text-center align-content-center">
       <p>Copyright {year}</p>
     </Container>
   );
