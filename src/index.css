@@ -24,3 +24,9 @@ html{
   align-items: center;
   justify-content: center;
 }
+
+.destination-image {
+  max-width: 300px;   
+  max-height: 200px;  
+  object-fit: cover;  
+}
