@@ -30,3 +30,11 @@ html{
   max-height: 200px;  
   object-fit: cover;  
 }
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
