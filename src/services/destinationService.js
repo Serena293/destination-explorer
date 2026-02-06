@@ -17,7 +17,7 @@ export const getAllDestinations = () => {
  * @param {string} filters.mood - 'culture'
  * @returns {Array} Filtered destinations
  */
-export const filterDestinations = ({ type, region, mood }) => {
+export const filterDestinations = ({ type, region, mood, search}) => {
   return destinationsData.filter((dest) => {
     let matches = true;
 
@@ -25,14 +25,22 @@ export const filterDestinations = ({ type, region, mood }) => {
       matches = matches && dest.type === type;
     }
 
-    if (region) {
-      matches = matches && dest.region === region;
+    if (region.length) {
+      matches = matches && region.includes(dest.region);
     }
 
-    if (mood) {
-      matches = matches && dest.mood.includes(mood);
+    if (mood.length) {
+      matches = matches && mood.some((m) => dest.mood.includes(m));
     }
-
+    
+    if (search) {
+      const term = search.toLowerCase();
+      matches =
+        matches &&
+        (dest.name.toLowerCase().includes(term) ||
+          dest.description.toLowerCase().includes(term) ||
+          dest.country.toLowerCase().includes(term));
+    }
     return matches;
   });
 };
