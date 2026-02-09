@@ -2,7 +2,7 @@ import React from "react";
 import Globe from "react-globe.gl";
 
 const BespokeTrip = () => {
-  // Esempio di punti sul globo
+ 
   const points = [
     { lat: 51.5074, lng: -0.1278, name: "London" },
     { lat: 48.8566, lng: 2.3522, name: "Paris" },

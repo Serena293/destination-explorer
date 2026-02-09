@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage";
 
 import "./index.css";
 import "./App.css";
+import BespokeTrip from "./components/BespokeTrip";
+import OurDestinations from "./components/OurDestinations"
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Router>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
+            <Route path="/our-destinations" element={<OurDestinations/>}></Route>
+            <Route path="/bespoke" element={<BespokeTrip/>}></Route>
           </Routes>
         </Router>
         </div>
