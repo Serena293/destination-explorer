@@ -1,0 +1,13 @@
+$primary: #FAB95B;    
+$secondary: #1A3263;
+$tertiary:#547792;
+$success: #2ecc71;
+$danger: #e63946;
+$warning: #f1c40f;
+
+@import "bootstrap/scss/bootstrap";
+
+body{
+    background-color: #EAEFEF;
+    font-style: italic;
+}

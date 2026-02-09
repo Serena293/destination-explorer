@@ -77,7 +77,8 @@ const OurDestination = () => {
         onReset={handleResetFilters}
       />
 
-      <section className="container my-5" id="our-destination">
+
+      <section className="container my-5 bg-tertiary" id="our-destination">
         <div className="row g-4 justify-content-center">
           {filteredDestinations.map((dest) => (
             <CardComponent
