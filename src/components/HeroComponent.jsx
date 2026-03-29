@@ -1,11 +1,13 @@
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Carousel } from "react-bootstrap";
 import "../scss/HeroComponent.scss";
 import { Link } from "react-router-dom";
+import CarouselComponent from "./CarouselComponent";
+
 
 const HeroComponent = () => {
   return (
     <>
-      <Container
+      {/* <Container
         fluid
         className="hero-container text-center d-flex flex-column justify-content-center align-items-center"
       >
@@ -14,9 +16,11 @@ const HeroComponent = () => {
           Explore amazing places, discover new experiences, and plan your next
           adventure.
         </p>
-      </Container>{" "}
+      </Container>{" "} */}
+      <CarouselComponent/>
+
       <div className="d-flex justify-content-center gap-5 bg-transparent py-3">
-        <Link to="/our-destinations">
+        <Link to="/ourdestinations">
           <button className="btn btn-link text-dark fw-bold border-bottom border-2">
             Our Destination
           </button>

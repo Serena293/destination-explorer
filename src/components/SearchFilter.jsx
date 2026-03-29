@@ -38,18 +38,7 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
   };
 
   return (
-    <div className="mb-3">
-      {/* Toggle button centrato */}
-      <div className="text-center mb-2">
-        <Button
-          variant="primary"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <i className="bi bi-chevron-up"></i> : <i className="bi bi-chevron-down"></i>} Filters
-        </Button>
-      </div>
-
-      {/* Collapsible filter content */}
+    <>
       <Collapse in={open}>
         <div>
           <Card className="p-3 bg-light shadow-sm rounded">
@@ -148,7 +137,19 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
           </Card>
         </div>
       </Collapse>
-    </div>
+      <div className="mb-3">
+        <div className="text-center mb-2 mt-2">
+          <Button variant="primary" onClick={() => setOpen(!open)}>
+            {open ? (
+              <i className="bi bi-chevron-up"></i>
+            ) : (
+              <i className="bi bi-chevron-down"></i>
+            )}{" "}
+            Filters
+          </Button>
+        </div>
+      </div>
+    </>
   );
 };
 

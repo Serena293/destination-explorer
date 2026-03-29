@@ -2,19 +2,21 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import BespokeTrip from './BespokeTrip';
+import { Link } from 'react-router-dom';
 
 function CollapsibleExample() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-primary">
       <Container>
-        <Navbar.Brand href="#home">Travel Agency</Navbar.Brand>
+        <Navbar.Brand href="/home">Travel Agency</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#our-destinations">Our Destinations</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-            <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <Nav.Link href="/ourdestinations">Our Destinations</Nav.Link>
+           <Nav.Link href="/bespoke">Bespoke Trip</Nav.Link>
+            {/* <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Contacts</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
               </NavDropdown.Item>
@@ -23,12 +25,12 @@ function CollapsibleExample() {
               <NavDropdown.Item href="#action/3.4">
                 Separated link
               </NavDropdown.Item>
-            </NavDropdown>
+            </NavDropdown> */}
           </Nav>
           <Nav>
-            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link href="/contact">Contact</Nav.Link>
             <Nav.Link eventKey={2} href="#memes">
-              Dank memes
+              About us
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

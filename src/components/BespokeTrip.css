@@ -1,0 +1,5 @@
+.globe-container{
+    max-width: 400px;
+    max-height: 400px;
+    aspect-ratio: 1/1;
+}

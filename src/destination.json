@@ -6,7 +6,7 @@
     "countryCode": "IT",
     "currency": "EUR",
     "description": "Rome is Italy's capital, famous for ancient ruins like the Colosseum and Vatican City. A city blending history, art, and vibrant street life.",
-    "imageUrl": "/assets/destinations/rome.jpg",
+    "imageUrl": "/destinations/rome.jpg",
     "type": "city",
     "region": "Europe",
     "mood": ["history", "culture", "food"]
@@ -18,7 +18,7 @@
     "countryCode": "IT",
     "currency": "EUR",
     "description": "Naples is a lively city near the sea, known for its pizza, historic streets, and proximity to Pompeii and the Amalfi Coast.",
-    "imageUrl": "/assets/destinations/naples.jpg",
+    "imageUrl": "/destinations/naples.jpg",
     "type": "city",
     "region": "Europe",
     "mood": ["food", "culture", "history"]
@@ -30,7 +30,7 @@
     "countryCode": "IT",
     "currency": "EUR",
     "description": "Alghero is a charming Sardinian town with Catalan influence, beautiful beaches, and a picturesque old town surrounded by medieval walls.",
-    "imageUrl": "/assets/destinations/alghero.jpg",
+    "imageUrl": "/destinations/alghero.jpg",
     "type": "city",
     "region": "Europe",
     "mood": ["nature", "culture", "beach"]
@@ -42,7 +42,7 @@
     "countryCode": "US",
     "currency": "USD",
     "description": "New York City is a dynamic metropolis famous for its skyline, Broadway theaters, Central Park, and iconic landmarks like the Statue of Liberty.",
-    "imageUrl": "/assets/destinations/newyork.jpg",
+    "imageUrl": "/destinations/newyork.jpg",
     "type": "city",
     "region": "North America",
     "mood": ["city-life", "culture", "food"]
@@ -66,7 +66,7 @@
     "countryCode": "ES",
     "currency": "EUR",
     "description": "Barcelona is a Mediterranean city famous for Gaudi's architecture, beaches, rich cuisine, and lively street culture.",
-    "imageUrl": "/assets/destinations/barcelona.jpg",
+    "imageUrl": "/destinations/barcelona.jpg",
     "type": "city",
     "region": "Europe",
     "mood": ["culture", "food", "city-life"]
@@ -78,7 +78,7 @@
     "countryCode": "FR",
     "currency": "EUR",
     "description": "The Côte d'Azur, or French Riviera, offers glamorous beaches, charming towns like Nice and Cannes, and stunning Mediterranean scenery.",
-    "imageUrl": "/assets/destinations/coteazur.jpg",
+    "imageUrl": "/destinations/coteazur.jpg",
     "type": "region",
     "region": "Europe",
     "mood": ["beach", "nature", "luxury"]
@@ -90,7 +90,7 @@
     "countryCode": "NZ",
     "currency": "NZD",
     "description": "New Zealand offers breathtaking landscapes from mountains to beaches and fjords, perfect for adventure, hiking, and nature exploration.",
-    "imageUrl": "/assets/destinations/newzealand.jpg",
+    "imageUrl": "/destinations/newzealand.jpg",
     "type": "country",
     "region": "Oceania",
     "mood": ["nature", "adventure", "culture"]
@@ -114,7 +114,7 @@
     "countryCode": "DO",
     "currency": "DOP",
     "description": "Punta Cana is a tropical paradise with stunning beaches, resorts, and clear waters, ideal for relaxation and water sports.",
-    "imageUrl": "/assets/destinations/puntacana.jpg",
+    "imageUrl": "/destinations/puntacana.jpg",
     "type": "city",
     "region": "North America",
     "mood": ["beach", "nature", "relaxation"]
@@ -126,7 +126,7 @@
     "countryCode": "CA",
     "currency": "CAD",
     "description": "Vancouver blends urban life with nature, surrounded by mountains and the Pacific Ocean, perfect for city lovers and outdoor enthusiasts.",
-    "imageUrl": "/assets/destinations/vancouver.jpg",
+    "imageUrl": "/destinations/vancouver.jpg",
     "type": "city",
     "region": "North America",
     "mood": ["nature", "city-life", "adventure"]
@@ -138,7 +138,7 @@
     "countryCode": "CA",
     "currency": "CAD",
     "description": "Toronto is a bustling city near the Niagara Falls, offering culture, shopping, and multicultural cuisine.",
-    "imageUrl": "/assets/destinations/toronto.jpg",
+    "imageUrl": "/destinations/toronto.jpg",
     "type": "city",
     "region": "North America",
     "mood": ["culture", "city-life", "nature"]
@@ -150,7 +150,7 @@
     "countryCode": "MY",
     "currency": "MYR",
     "description": "Kuala Lumpur is a modern city known for the Petronas Towers, bustling markets, and rich cultural diversity.",
-    "imageUrl": "/assets/destinations/kualalumpur.jpg",
+    "imageUrl": "/destinations/kualalumpur.jpg",
     "type": "city",
     "region": "Asia",
     "mood": ["culture", "city-life", "food"]
@@ -162,7 +162,7 @@
     "countryCode": "BA",
     "currency": "BAM",
     "description": "Sarajevo is a historic city where cultures meet, with Ottoman and Austro-Hungarian architecture, and a vibrant street life.",
-    "imageUrl": "/assets/destinations/sarajevo.jpg",
+    "imageUrl": "/destinations/sarajevo.jpg",
     "type": "city",
     "region": "Europe",
     "mood": ["history", "culture", "food"]
