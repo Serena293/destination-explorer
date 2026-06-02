@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button, Collapse, Card } from "react-bootstrap";
+import { Button, Offcanvas, Card } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
-  const [open, setOpen] = useState(true);
+  const [show, setShow] = useState(false);
 
   const availableMoods = [
     "history",
@@ -39,9 +39,12 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
 
   return (
     <>
-      <Collapse in={open}>
-        <div>
-          <Card className="p-3 bg-light shadow-sm rounded">
+      <Offcanvas show={show} onHide={() => setShow(false)} placement="start">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Filters</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Card className="border-0">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -135,17 +138,12 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
               </div>
             </form>
           </Card>
-        </div>
-      </Collapse>
+        </Offcanvas.Body>
+      </Offcanvas>
       <div className="mb-3">
         <div className="text-center mb-2 mt-2">
-          <Button variant="primary" onClick={() => setOpen(!open)}>
-            {open ? (
-              <i className="bi bi-chevron-up"></i>
-            ) : (
-              <i className="bi bi-chevron-down"></i>
-            )}{" "}
-            Filters
+          <Button variant="primary" onClick={() => setShow(true)}>
+            <i className="bi bi-funnel"></i> Filters
           </Button>
         </div>
       </div>

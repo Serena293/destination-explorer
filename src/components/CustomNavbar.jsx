@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import BespokeTrip from './BespokeTrip';
 import { Link } from 'react-router-dom';
 
-function CollapsibleExample() {
+function CustomNavbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-primary">
       <Container>
@@ -39,4 +39,4 @@ function CollapsibleExample() {
   );
 }
 
-export default CollapsibleExample;
+export default CustomNavbar;
