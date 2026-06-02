@@ -15,10 +15,13 @@ const INITIAL_FILTERS = {
   search: "",
 };
 
+const ITEMS_PER_LOAD = 6;
+
 const OurDestination = () => {
   const [destinations, setDestinations] = useState([]);
   const [filteredDestinations, setFilteredDestinations] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
 
   // Filters being edited in the UI
   const [draftFilters, setDraftFilters] = useState(INITIAL_FILTERS);
@@ -51,6 +54,8 @@ const OurDestination = () => {
       try {
         const filtered = filterDestinations(appliedFilters);
         setFilteredDestinations(filtered);
+
+        setVisibleCount(ITEMS_PER_LOAD);
       } catch (error) {
         console.error("Error filtering data", error);
       }
@@ -77,21 +82,33 @@ const OurDestination = () => {
         onReset={handleResetFilters}
       />
 
-
       <section className="container my-5 bg-tertiary" id="our-destination">
         <div className="row g-4 justify-content-center">
-          {filteredDestinations.map((dest) => (
+          {filteredDestinations.slice(0, visibleCount).map((dest) => (
+               <div key={dest.id} className="col-12 col-md-6 col-lg-4">
             <CardComponent
-              key={dest.id}
+          
               destination={dest}
               onSelect={selectCard}
             />
+            </div>
           ))}
         </div>
         {selectedCard && (
           <ModalComponent destination={selectedCard} onClose={closeModal} />
         )}
       </section>
+
+      {visibleCount < filteredDestinations.length && (
+        <div className="text-center mt-4">
+          <button
+            className="btn btn-primary mb-3"
+            onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_LOAD)}
+          >
+            Load More
+          </button>
+        </div>
+      )}
     </>
   );
 };

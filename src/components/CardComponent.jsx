@@ -1,12 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+
 const CardComponent = ({ destination, onSelect}) => {
   return (
-    <Card style={{ width: "18rem" }} className="mx-3">
+    <Card className="mx-3 w-100 h-100">
       <Card.Img
         variant="top"
-        className="destination-image"
+        className="destination-image-card"
         src={destination.imageUrl}
       />
       <Card.Body>

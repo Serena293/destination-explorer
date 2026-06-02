@@ -44,3 +44,8 @@ html{
   height: 100px;  
   position: relative;
 } */
+
+.destination-image-card {
+  height: 250px;
+  object-fit: cover;
+}

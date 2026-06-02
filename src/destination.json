@@ -54,7 +54,7 @@
     "countryCode": "GB",
     "currency": "GBP",
     "description": "London is a vibrant city known for its museums, historical landmarks like the Tower of London, and multicultural neighborhoods.",
-    "imageUrl": "/assets/destinations/london.jpg",
+    "imageUrl": "/destinations/london.jpg",
     "type": "city",
     "region": "Europe",
     "mood": ["culture", "history", "city-life"]
@@ -102,7 +102,7 @@
     "countryCode": "VN",
     "currency": "VND",
     "description": "Vietnam is known for its rich culture, vibrant street food, lush landscapes, and historic cities like Hanoi and Ho Chi Minh City.",
-    "imageUrl": "/assets/destinations/vietnam.jpg",
+    "imageUrl": "/destinations/vietnam.jpg",
     "type": "country",
     "region": "Asia",
     "mood": ["culture", "food", "nature"]

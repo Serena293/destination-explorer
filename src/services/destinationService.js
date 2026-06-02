@@ -3,19 +3,19 @@ import destinationsData from "../destination.json";
 
 /**
  * Get all destinations
- * @returns {Array} Array of destination objects
+ * @returns {Array} 
  */
 export const getAllDestinations = () => {
   return destinationsData;
 };
 
 /**
- * Filter destinations by criteria
+ * Filter destinations 
  * @param {Object} filters
- * @param {string} filters.type - 'city' | 'country' | 'region'
- * @param {string} filters.region - 'Europe'
- * @param {string} filters.mood - 'culture'
- * @returns {Array} Filtered destinations
+ * @param {string} filters.type 
+ * @param {string} filters.region 
+ * @param {string} filters.mood 
+ * @returns {Array} 
  */
 export const filterDestinations = ({ type, region, mood, search}) => {
   return destinationsData.filter((dest) => {
@@ -48,7 +48,7 @@ export const filterDestinations = ({ type, region, mood, search}) => {
 /**
  * Get destination by ID
  * @param {string} id
- * @returns {Object|null} destination object
+ * @returns {Object|null} 
  */
 export const getDestinationById = (id) => {
   return destinationsData.find((dest) => dest.id === id) || null;
