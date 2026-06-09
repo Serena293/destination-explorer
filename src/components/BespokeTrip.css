@@ -1,5 +1,6 @@
-.globe-container{
-    max-width: 400px;
-    max-height: 400px;
-    aspect-ratio: 1/1;
+.globe-container {
+  width: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  background-color: #547792;
 }

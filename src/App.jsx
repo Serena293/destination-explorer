@@ -1,34 +1,39 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import CustomNavbar from "./components/CustomNavbar";
-import HomePage from "./pages/HomePage"
+import HomePage from "./pages/HomePage";
 import "./index.css";
 
-import BespokeTrip from "./components/BespokeTrip";
-import OurDestinations from "./components/OurDestinations"
+import OurDestinations from "./components/OurDestinations";
 import ContactForm from "./components/ContactForm";
+
+const BespokeTrip = lazy(() => import("./components/BespokeTrip"));
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <main className="app-container">
-        <CustomNavbar/>
+        <CustomNavbar />
         <div className="main-content">
-        <Router>
-          <Routes>
-             <Route path="/" element={<HomePage/>}></Route>
-            <Route path="/home" element={<HomePage/>}></Route>
-            <Route path="/ourdestinations" element={<OurDestinations/>}></Route>
-            <Route path="/bespoke" element={<BespokeTrip/>}></Route>
-            <Route path="/contact" element={<ContactForm/>}> </Route>
-          </Routes>
-        </Router>
+          <Suspense
+            fallback={
+              <p className="text-center my-5">Loading trip planner...</p>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route path="/ourdestinations" element={<OurDestinations />} />
+              <Route path="/bespoke" element={<BespokeTrip />} />
+              <Route path="/contact" element={<ContactForm />} />
+            </Routes>
+          </Suspense>
         </div>
         <Footer />
       </main>
-      
-    </>
+    </BrowserRouter>
   );
 }
 

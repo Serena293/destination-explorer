@@ -1,16 +1,86 @@
-# React + Vite
+# Destination Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Destination Explorer is a React travel discovery app for browsing destinations,
+filtering them by region and trip mood, and opening richer destination details.
+It is built as a portfolio project to practice product thinking, frontend
+implementation, structured data, and clean delivery workflows.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Destination catalogue powered by structured local JSON data
+- Search by destination name, country, or description
+- Region and mood filters with an offcanvas filter panel
+- Destination cards, detail modal, and incremental "Load More" browsing
+- Bespoke trip page with an interactive 3D globe prototype
+- React Router navigation without full page reloads
+- Lazy loading for the heavier 3D trip planner route
+- Responsive Bootstrap-based layout with custom visual styling
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- Vite
+- React Router
+- React Bootstrap and Bootstrap Icons
+- React Globe GL and Three.js
+- ESLint
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the local dev server:
+
+```bash
+npm run dev
+```
+
+Check code quality:
+
+```bash
+npm run lint
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+```text
+src/
+  components/           Reusable UI components
+  pages/                Page-level views
+  services/             Destination data access and filtering logic
+  scss/                 Custom Bootstrap overrides and hero styles
+  destination.json      Local destination dataset
+public/
+  assets/               Shared static assets
+  destinations/         Destination photography
+docs/
+  api.md                External API notes and future data ideas
+  interface.md          Destination data contract
+```
+
+## Portfolio Focus
+
+The project is designed to show:
+
+- how a travel-planning interface can reduce decision friction
+- how UI state, filtering, routing, and reusable components fit together
+- how to turn static data into a small but complete user experience
+- how to document and verify a frontend project before sharing it
+
+## Next Improvements
+
+- Add a shortlist feature so users can save and compare destinations
+- Add unit tests for the filtering service
+- Add component tests for filters, cards, and modal behaviour
+- Add richer destination metadata such as budget, best season, and trip length
+- Integrate a public API for country, weather, or travel context data
