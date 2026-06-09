@@ -1,7 +1,7 @@
 .hero-container {
   min-height: 70vh;
   color: white;
-  background-image: url("../assets/beach.jpg"); 
+  background-image: url("/assets/beach.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -13,7 +13,6 @@
   justify-content: center;
   align-items: center;
 
-  // overlay dark
   &::before {
     content: "";
     position: absolute;
@@ -25,7 +24,6 @@
     z-index: 1;
   }
 
-  // testo sopra overlay
   .hero-title,
   .hero-subtitle,
   .hero-btn {
@@ -49,7 +47,6 @@
   }
 }
 
-// Responsive
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;

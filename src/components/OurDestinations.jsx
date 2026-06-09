@@ -18,7 +18,6 @@ const INITIAL_FILTERS = {
 const ITEMS_PER_LOAD = 6;
 
 const OurDestination = () => {
-  const [destinations, setDestinations] = useState([]);
   const [filteredDestinations, setFilteredDestinations] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_LOAD);
@@ -40,7 +39,6 @@ const OurDestination = () => {
     const loadDestinations = async () => {
       try {
         const all = getAllDestinations();
-        setDestinations(all);
         setFilteredDestinations(all);
       } catch (error) {
         console.error("Error loading destination", error);
@@ -85,15 +83,16 @@ const OurDestination = () => {
       <section className="container my-5 bg-tertiary" id="our-destination">
         <div className="row g-4 justify-content-center">
           {filteredDestinations.slice(0, visibleCount).map((dest) => (
-               <div key={dest.id} className="col-12 col-md-6 col-lg-4">
-            <CardComponent
-          
-              destination={dest}
-              onSelect={selectCard}
-            />
+            <div key={dest.id} className="col-12 col-md-6 col-lg-4">
+              <CardComponent destination={dest} onSelect={selectCard} />
             </div>
           ))}
         </div>
+        {!filteredDestinations.length && (
+          <p className="text-center my-5">
+            No destinations match those filters yet.
+          </p>
+        )}
         {selectedCard && (
           <ModalComponent destination={selectedCard} onClose={closeModal} />
         )}

@@ -1,36 +1,28 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import BespokeTrip from './BespokeTrip';
-import { Link } from 'react-router-dom';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Link, NavLink } from "react-router-dom";
 
 function CustomNavbar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="bg-primary">
       <Container>
-        <Navbar.Brand href="/home">Travel Agency</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          Destination Explorer
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/ourdestinations">Our Destinations</Nav.Link>
-           <Nav.Link href="/bespoke">Bespoke Trip</Nav.Link>
-            {/* <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Contacts</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
+            <Nav.Link as={NavLink} to="/ourdestinations">
+              Our Destinations
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/bespoke">
+              Bespoke Trip
+            </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="/contact">Contact</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              About us
+            <Nav.Link as={NavLink} to="/contact">
+              Contact
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
