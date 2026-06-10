@@ -11,10 +11,10 @@ const INTEREST_OPTIONS = [
   "Relaxation",
 ];
 
-const TripPreferencesForm = () => {
-  const [departure, setDeparture] = useState(null);
-  const [destination, setDestination] = useState(null);
-  const [flexibleDestination, setFlexibleDestination] = useState(false);
+const TripPreferencesForm = ({departure,setDeparture, destination, setDestination, flexibleDestination, setFlexibleDestination}) => {
+  // const [departure, setDeparture] = useState(null);
+  // const [destination, setDestination] = useState(null);
+  // const [flexibleDestination, setFlexibleDestination] = useState(false);
   const [departureDate, setDepartureDate] = useState("");
   const [flexibleDates, setFlexibleDates] = useState(false);
   const [travellers, setTravellers] = useState(1);
@@ -23,7 +23,6 @@ const TripPreferencesForm = () => {
   const [interests, setInterests] = useState([]);
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
-
 
   const toggleInterest = (interest) => {
     setInterests((currentInterests) =>
@@ -38,32 +37,7 @@ const TripPreferencesForm = () => {
     setSubmitted(true);
   };
 
-  // const handleCitySearch = async () => {
-  //   setCityError("");
-  //   setCityResults([]);
-
-  //   if (departureQuery.trim().length < 3) {
-  //     setCityError("Enter at least three characters.");
-  //     return;
-  //   }
-
-  //   try {
-  //     setIsSearching(true);
-
-  //     const results = await searchCities(departureQuery);
-
-  //     setCityResults(results);
-
-  //     if (results.length === 0) {
-  //       setCityError("No cities found.");
-  //     }
-  //   } catch (error) {
-  //     setCityError(error.message);
-  //   } finally {
-  //     setIsSearching(false);
-  //   }
-  // };
-
+ 
   return (
     <section className="container py-5">
       <header className="mb-4">
