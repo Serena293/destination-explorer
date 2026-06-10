@@ -1,0 +1,33 @@
+.budget-range {
+  accent-color: #1a3263;
+}
+
+/* Chrome, Edge e Safari */
+.budget-range::-webkit-slider-runnable-track {
+  height: 8px;
+  background-color: #547792;
+  border-radius: 4px;
+}
+
+.budget-range::-webkit-slider-thumb {
+  background-color: #fab95b;
+  margin-top: -4px;
+}
+
+/* Firefox */
+.budget-range::-moz-range-track {
+  height: 8px;
+  background-color: #547792;
+  border-radius: 4px;
+}
+
+.budget-range::-moz-range-progress {
+  height: 8px;
+  background-color: #1a3263;
+  border-radius: 4px;
+}
+
+.budget-range::-moz-range-thumb {
+  background-color: #fab95b;
+  border: 2px solid #1a3263;
+}

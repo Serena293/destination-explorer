@@ -1,6 +1,7 @@
 import Globe from "react-globe.gl";
 import ContactForm from "./ContactForm";
 import "./BespokeTrip.css";
+import TripPreferencesForm from "./TripPreferencesForm";
 
 const BespokeTrip = () => {
   const points = [
@@ -29,14 +30,15 @@ const BespokeTrip = () => {
           height={typeof window !== "undefined" ? window.innerHeight * 0.3 : 320}
         />
       </div>
-      <div className="d-flex flex-column text-center">
+      {/* <div className="d-flex flex-column text-center">
         <h1>Plan your personalized trip</h1>
         <p>Have an idea but not quite sure how to make it work?</p>
         <p>
           Contact us with the details and we will help you shape the next step.
-        </p>
-      </div>
-      <ContactForm />
+        </p> */}
+      {/* </div> */}
+      {/* <ContactForm /> */}
+      <TripPreferencesForm/>
     </section>
   );
 };
