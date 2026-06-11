@@ -2,12 +2,14 @@ import Globe from "react-globe.gl";
 import ContactForm from "./ContactForm";
 import "./BespokeTrip.css";
 import TripPreferencesForm from "./TripPreferencesForm";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const BespokeTrip = () => {
   const [departure, setDeparture] = useState(null);
   const [destination, setDestination] = useState(null);
   const [flexibleDestination, setFlexibleDestination] = useState(false);
+
+  const globeRef = useRef(null);
 
   const points = [
     departure && {
@@ -34,6 +36,21 @@ const BespokeTrip = () => {
           },
         ]
       : [];
+
+  useEffect(() => {
+    const selectedCity = destination || departure;
+
+    if (!selectedCity || !globeRef.current) return;
+
+    globeRef.current.pointOfView(
+      {
+        lat: selectedCity.latitude,
+        lng: selectedCity.longitude,
+        altitude: 1.8,
+      },
+      1000,
+    );
+  }, [departure, destination]);
 
   return (
     <section className="d-flex flex-column">
@@ -69,6 +86,7 @@ const BespokeTrip = () => {
           arcDashGap={0}
           arcDashAnimateTime={0}
           arcAltitudeAutoScale={0.6}
+          ref={globeRef}
         />
       </div>
       {/* <div className="d-flex flex-column text-center">

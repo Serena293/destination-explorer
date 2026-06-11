@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../style.css";
 import CitySearchField from "./CitySearchField";
+import { useForm, ValidationError } from "@formspree/react";
 
 const INTEREST_OPTIONS = [
   "Culture",
@@ -11,10 +12,25 @@ const INTEREST_OPTIONS = [
   "Relaxation",
 ];
 
-const TripPreferencesForm = ({departure,setDeparture, destination, setDestination, flexibleDestination, setFlexibleDestination}) => {
-  // const [departure, setDeparture] = useState(null);
-  // const [destination, setDestination] = useState(null);
-  // const [flexibleDestination, setFlexibleDestination] = useState(false);
+const ERROR_MESSAGES = {
+  departure: "Select a departure city from the results.",
+  destination: "Select a destination or choose flexible.",
+  departureDate: "Select a date or choose flexible dates.",
+  name: "Enter a valid name (3 char min).",
+  email: "Enter a valid email address.",
+  consent: "Confirm that we can contact you about this trip.",
+};
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const TripPreferencesForm = ({
+  departure,
+  setDeparture,
+  destination,
+  setDestination,
+  flexibleDestination,
+  setFlexibleDestination,
+}) => {
   const [departureDate, setDepartureDate] = useState("");
   const [flexibleDates, setFlexibleDates] = useState(false);
   const [travellers, setTravellers] = useState(1);
@@ -24,6 +40,13 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const [formspreeState, submitToFormspree] = useForm("xnjybgyr");
+
   const toggleInterest = (interest) => {
     setInterests((currentInterests) =>
       currentInterests.includes(interest)
@@ -32,12 +55,80 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
     );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
+
+    const nextErrors = {};
+
+    if (!departure) {
+      nextErrors.departure = ERROR_MESSAGES.departure;
+    }
+
+    if (!destination && !flexibleDestination) {
+      nextErrors.destination = ERROR_MESSAGES.destination;
+    }
+
+    if (!departureDate && !flexibleDates) {
+      nextErrors.departureDate = ERROR_MESSAGES.departureDate;
+    }
+
+    if (name.trim().length < 3) {
+      nextErrors.name = ERROR_MESSAGES.name;
+    }
+
+    if (!EMAIL_PATTERN.test(email.trim())) {
+      nextErrors.email = ERROR_MESSAGES.email;
+    }
+
+    if (!consent) {
+      nextErrors.consent = ERROR_MESSAGES.consent;
+    }
+
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      setSubmitted(false);
+      return;
+    }
+
+    await submitToFormspree({
+      name: name.trim(),
+      email: email.trim(),
+
+      departure: `${departure.name}, ${departure.country}`,
+
+      destination: flexibleDestination
+        ? "Flexible"
+        : `${destination.name}, ${destination.country}`,
+
+      departureDate: flexibleDates ? "Flexible" : departureDate,
+
+      tripLengthDays: days,
+      travellers,
+      budget: `£${budget}`,
+
+      interests: interests.length ? interests.join(", ") : "None selected",
+
+      notes: notes.trim() || "No additional notes",
+
+      consent,
+
+      departureLatitude: departure.latitude,
+      departureLongitude: departure.longitude,
+
+      destinationLatitude: destination?.latitude ?? "",
+      destinationLongitude: destination?.longitude ?? "",
+    });
   };
 
- 
+  const clearError = (field) => {
+    setErrors((currentErrors) => {
+      const nextErrors = { ...currentErrors };
+      delete nextErrors[field];
+      return nextErrors;
+    });
+  };
+
   return (
     <section className="container py-5">
       <header className="mb-4">
@@ -51,21 +142,54 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
       <form onSubmit={handleSubmit}>
         <fieldset className="mb-4">
           <legend>Where</legend>
+          <div>
+            <CitySearchField
+              label="City or departure airport"
+              helpText="Enter at least three characters, then select a city."
+              value={departure}
+              onChange={(city) => {
+                setDeparture(city);
 
-          <CitySearchField
-            label="City or departure airport"
-            helpText="Enter at least three characters, then select a city."
-            value={departure}
-            onChange={setDeparture}
-            required
-          />
-          <CitySearchField
-            label="Destination"
-            value={destination}
-            onChange={setDestination}
-            disabled={flexibleDestination}
-          />
+                if (city) {
+                  clearError("departure");
+                }
+              }}
+              id="departure"
+              required
+              aria-invalid={Boolean(errors.departure)}
+              aria-describedby={
+                errors.departure ? "departure-error" : undefined
+              }
+            />
+            {errors.departure && (
+              <p id="departure-error" className="text-danger mt-1" role="alert">
+                {errors.departure}
+              </p>
+            )}
+          </div>
+          <div>
+            <CitySearchField
+              label="Destination"
+              value={destination}
+              onChange={setDestination}
+              disabled={flexibleDestination}
+              id="destination"
+              aria-invalid={Boolean(errors.destination)}
+              aria-describedby={
+                errors.destination ? "destination-error" : undefined
+              }
+            />
 
+            {errors.destination && (
+              <p
+                id="destination-error"
+                className="text-danger mt-1"
+                role="alert"
+              >
+                {errors.destination}
+              </p>
+            )}
+          </div>
           <div className="form-check">
             <input
               className="form-check-input"
@@ -95,7 +219,21 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
               onChange={(event) => setDepartureDate(event.target.value)}
               disabled={flexibleDates}
               required={!flexibleDates}
+              aria-invalid={Boolean(errors.departureDate)}
+              aria-describedby={
+                errors.departureDate ? "departure-date-error" : undefined
+              }
             />
+
+            {errors.departureDate && (
+              <p
+                id="departure-date-error"
+                className="text-danger mt-1"
+                role="alert"
+              >
+                {errors.departureDate}
+              </p>
+            )}
           </div>
 
           <div className="mb-3">
@@ -120,7 +258,14 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
               type="checkbox"
               id="flexible-dates"
               checked={flexibleDates}
-              onChange={(event) => setFlexibleDates(event.target.checked)}
+              onChange={(event) => {
+                const isFlexible = event.target.checked;
+
+                setFlexibleDates(isFlexible);
+                if (isFlexible) {
+                  setDepartureDate(null);
+                }
+              }}
             />
             <label className="form-check-label" htmlFor="flexible-dates">
               My dates are flexible
@@ -204,6 +349,78 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
             onChange={(event) => setNotes(event.target.value)}
           />
         </div>
+        <fieldset className="mb-4">
+          <legend>Contacts</legend>
+
+          <div className="mb-3">
+            <label className="form-label" htmlFor="name">
+              Name
+            </label>
+            <input
+              className="form-control"
+              id="name"
+              type="text"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+                clearError("name");
+              }}
+              aria-invalid={Boolean(errors.name)}
+              aria-describedby={errors.name ? "name-error" : undefined}
+            />
+            {errors.name && (
+              <p id="name-error" className="text-danger" role="alert">
+                {errors.name}
+              </p>
+            )}
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label" htmlFor="email">
+              Email
+            </label>
+            <input
+              className="form-control"
+              id="email"
+              type="email"
+              value={email}
+              onChange={(event) => {
+                setEmail(event.target.value);
+                clearError("email");
+              }}
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? "email-error" : undefined}
+            />
+            {errors.email && (
+              <p id="email-error" className="text-danger" role="alert">
+                {errors.email}
+              </p>
+            )}
+          </div>
+
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              id="contact-consense"
+              checked={consent}
+              onChange={(event) => {
+                setConsent(event.target.checked);
+                clearError("consent");
+              }}
+              aria-invalid={Boolean(errors.consent)}
+              aria-describedby={errors.consent ? "consent-error" : undefined}
+            />
+            <label className="form-check-label" htmlFor="contact-consense">
+              Confirm that we can contact you about this trip
+            </label>
+            {errors.consent && (
+              <p id="consent-error" className="text-danger mt-1" role="alert">
+                {errors.consent}
+              </p>
+            )}
+          </div>
+        </fieldset>
 
         <section className="mb-4" aria-labelledby="trip-summary-title">
           <h2 id="trip-summary-title">Your trip summary</h2>
@@ -216,9 +433,11 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
           </p>
           <p>
             <strong>Destination:</strong>
-            {flexibleDestination ? "Flexible" 
-            : destination  
-            ? `${destination.name}, ${destination.country}`: "Not selected"}
+            {flexibleDestination
+              ? "Flexible"
+              : destination
+                ? `${destination.name}, ${destination.country}`
+                : "Not selected"}
           </p>
           <p>
             <strong>Date:</strong>{" "}
@@ -234,15 +453,30 @@ const TripPreferencesForm = ({departure,setDeparture, destination, setDestinatio
             <strong>Interests:</strong>{" "}
             {interests.length ? interests.join(", ") : "None selected"}
           </p>
+          <p>
+            <strong>Name:</strong>
+            {name}
+          </p>
         </section>
 
-        <button className="btn btn-primary" type="submit">
-          Complete trip brief
+        <button
+          className="btn btn-primary"
+          type="submit"
+          disabled={formspreeState.submitting}
+        >
+          {formspreeState.submitting
+            ? "Sending trip brief..."
+            : "Send trip brief"}
         </button>
 
-        {submitted && (
-          <p className="mt-3" role="status">
-            Your trip brief is ready.
+        <ValidationError
+          errors={formspreeState.errors}
+          className="text-danger mt-3"
+        />
+
+        {formspreeState.succeeded && (
+          <p className="text-success mt-3" role="status">
+            Your trip brief has been sent successfully.
           </p>
         )}
       </form>
