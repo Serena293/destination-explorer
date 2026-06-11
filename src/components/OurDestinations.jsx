@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import CardComponent from "./CardComponent";
 import ModalComponent from "./ModalComponent";
 import SearchFilter from "./SearchFilter";
-
+import { useShortlist } from "../context/shortlistContext";
 import {
   getAllDestinations,
   filterDestinations,
 } from "../services/destinationService";
+
+import { Link } from "react-router-dom";
 
 const INITIAL_FILTERS = {
   type: "",
@@ -35,8 +37,7 @@ const OurDestination = () => {
     setSelectedCard(null);
   };
 
-  const [savedDestinationIds, setSavedDestinationIds] = useState([]);
-
+  const { savedDestinationIds } = useShortlist();
   useEffect(() => {
     const loadDestinations = async () => {
       try {
@@ -73,23 +74,22 @@ const OurDestination = () => {
     setAppliedFilters(INITIAL_FILTERS);
   };
 
-  const toggleSavedDestination = (destinationId) => {
-    setSavedDestinationIds((currentIds) =>
-      currentIds.includes(destinationId)
-        ? currentIds.filter((id) => id !== destinationId)
-        : [...currentIds, destinationId],
-    );
-  };
+  const { toggleSavedDestination, isDestinationSaved } = useShortlist();
 
   return (
     <>
-      <SearchFilter
-        filters={draftFilters}
-        onChange={setDraftFilters}
-        onApply={handleApplyFilters}
-        onReset={handleResetFilters}
-      />
+      <section className="d-flex p-2 justify-content-between ">
+        <SearchFilter
+          filters={draftFilters}
+          onChange={setDraftFilters}
+          onApply={handleApplyFilters}
+          onReset={handleResetFilters}
+        />
 
+        <Link to="/ShortlistPage" className="text-decoration-none text-dark">
+          Shortlisted Destinations ({savedDestinationIds.length})
+        </Link>
+      </section>
       <section className="container my-5 bg-tertiary" id="our-destination">
         <div className="row g-4 justify-content-center">
           {filteredDestinations.slice(0, visibleCount).map((dest) => (
@@ -97,7 +97,7 @@ const OurDestination = () => {
               <CardComponent
                 destination={dest}
                 onSelect={selectCard}
-                isSaved={savedDestinationIds.includes(dest.id)}
+                isSaved={isDestinationSaved(dest.id)}
                 onToggleSave={() => toggleSavedDestination(dest.id)}
               />
             </div>
@@ -109,7 +109,12 @@ const OurDestination = () => {
           </p>
         )}
         {selectedCard && (
-          <ModalComponent destination={selectedCard} onClose={closeModal} />
+          <ModalComponent
+            destination={selectedCard}
+            onClose={closeModal}
+            isSaved={isDestinationSaved(selectedCard.id)}
+            onToggleSave={() => toggleSavedDestination(selectedCard.id)}
+          />
         )}
       </section>
 
