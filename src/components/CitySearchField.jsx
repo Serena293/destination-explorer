@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { searchCities } from "../services/cityService";
 
-const CitySearchField = ({id, label, helpText, value, onChange, disabled =false,required = false }) => {
-  const [query, setQuery] = useState(value ? `${value.name}, ${value.country}` : "");
+const CitySearchField = ({
+  id,
+  label,
+  helpText,
+  value,
+  onChange,
+  disabled = false,
+  required = false,
+  ariaInvalid,
+  ariaDescribedby,
+}) => {
+  const [query, setQuery] = useState(
+    value ? `${value.name}, ${value.country}` : "",
+  );
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+  setQuery(value ? `${value.name}, ${value.country}` : "");
+}, [value]);
 
   const handleSearch = async () => {
     setError("");
@@ -38,7 +54,7 @@ const CitySearchField = ({id, label, helpText, value, onChange, disabled =false,
   return (
     <div className="mb-3">
       {label && (
-        <label className="form-label" htmlFor="city-search-input">
+        <label className="form-label" htmlFor={id}>
           {label}
           {required && <span className="text-danger ms-1">*</span>}
         </label>
@@ -55,14 +71,23 @@ const CitySearchField = ({id, label, helpText, value, onChange, disabled =false,
             setQuery(e.target.value);
             if (value) onChange(null);
           }}
-          aria-describedby={helpText ? `${id}-help` : undefined}
+          aria-describedby={
+            [
+              helpText ? `${id}-help` : null,
+              ariaDescribedby,
+              error ? `${id}-internal-error` : null,
+            ]
+              .filter(Boolean)
+              .join(" ") || undefined
+          }
+          aria-invalid={ariaInvalid || Boolean(error)}
           required={required}
         />
         <button
           className="btn btn-secondary"
           type="button"
           onClick={handleSearch}
-          disabled={disabled ||isSearching}
+          disabled={disabled || isSearching}
         >
           {isSearching ? "Searching..." : "Search"}
         </button>
@@ -75,7 +100,7 @@ const CitySearchField = ({id, label, helpText, value, onChange, disabled =false,
       )}
 
       {error && (
-        <p className="text-danger" role="alert">
+        <p id={`${id}-internal-error`} className="text-danger" role="alert">
           {error}
         </p>
       )}
