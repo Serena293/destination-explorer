@@ -35,6 +35,8 @@ const OurDestination = () => {
     setSelectedCard(null);
   };
 
+  const [savedDestinationIds, setSavedDestinationIds] = useState([]);
+
   useEffect(() => {
     const loadDestinations = async () => {
       try {
@@ -71,6 +73,14 @@ const OurDestination = () => {
     setAppliedFilters(INITIAL_FILTERS);
   };
 
+  const toggleSavedDestination = (destinationId) => {
+    setSavedDestinationIds((currentIds) =>
+      currentIds.includes(destinationId)
+        ? currentIds.filter((id) => id !== destinationId)
+        : [...currentIds, destinationId],
+    );
+  };
+
   return (
     <>
       <SearchFilter
@@ -84,7 +94,12 @@ const OurDestination = () => {
         <div className="row g-4 justify-content-center">
           {filteredDestinations.slice(0, visibleCount).map((dest) => (
             <div key={dest.id} className="col-12 col-md-6 col-lg-4">
-              <CardComponent destination={dest} onSelect={selectCard} />
+              <CardComponent
+                destination={dest}
+                onSelect={selectCard}
+                isSaved={savedDestinationIds.includes(dest.id)}
+                onToggleSave={() => toggleSavedDestination(dest.id)}
+              />
             </div>
           ))}
         </div>

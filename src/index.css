@@ -43,3 +43,47 @@ html {
   height: 250px;
   object-fit: cover;
 }
+
+/* ourdestinations */
+
+/* Assicura che la card sia il punto di riferimento per il posizionamento assoluto */
+.card {
+  position: relative;
+}
+
+.save-destination-button {
+  position: absolute;
+  top: 240px;
+
+  right: 10px;
+
+  left: auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #1a3263;
+  background: transparent;
+  border: 0;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.save-destination-button:hover,
+.save-destination-button:focus-visible {
+  color: #fab95b;
+}
+
+.save-destination-button[aria-pressed="true"] {
+  color: #fab95b;
+}
+
+.save-destination-button:focus-visible {
+  outline: 3px solid #fab95b;
+  outline-offset: 2px;
+}
