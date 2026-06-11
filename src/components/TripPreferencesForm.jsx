@@ -38,8 +38,7 @@ const TripPreferencesForm = ({
   const [budget, setBudget] = useState(500);
   const [interests, setInterests] = useState([]);
   const [notes, setNotes] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
+ 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
@@ -87,7 +86,7 @@ const TripPreferencesForm = ({
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
-      setSubmitted(false);
+   
       return;
     }
 
