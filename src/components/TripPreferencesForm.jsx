@@ -457,6 +457,8 @@ const TripPreferencesForm = ({
             <strong>Name:</strong>
             {name}
           </p>
+          <p><strong>Email address:</strong>
+          {email}</p>
         </section>
 
         <button
