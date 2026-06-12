@@ -1,6 +1,115 @@
-.globe-container {
-  width: 100%;
-  min-height: 320px;
+.globe-scene {
+  position: relative;
+  min-height: 560px;
   overflow: hidden;
-  background-color: #547792;
+  color: #fff;
+  background-color: #07111f;
+  border-bottom: 5px solid #fab95b;
+}
+
+.globe-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 560px;
+  overflow: hidden;
+  background-color: #07111f;
+}
+
+.globe-container canvas {
+  display: block;
+  transform: translateX(16%);
+}
+
+.globe-scene-content {
+  position: relative;
+  z-index: 2;
+  width: min(100% - 2rem, 1200px);
+  margin-inline: auto;
+  padding-top: 4.5rem;
+  pointer-events: none;
+}
+
+.globe-scene-content h1 {
+  width: min(560px, 100%);
+  margin-bottom: 1rem;
+  font-size: 4.25rem;
+  line-height: 1.02;
+}
+
+.globe-scene-content > p:not(.globe-eyebrow) {
+  width: min(500px, 100%);
+  color: #d9e5eb;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.globe-eyebrow {
+  margin-bottom: 0.75rem;
+  color: #fab95b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.globe-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.globe-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.globe-legend-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.globe-legend-departure {
+  background-color: #fab95b;
+}
+
+.globe-legend-destination {
+  background-color: #e63946;
+}
+
+@media (max-width: 767.98px) {
+  .globe-scene,
+  .globe-container {
+    min-height: 430px;
+  }
+
+  .globe-scene-content {
+    padding-top: 2.25rem;
+  }
+
+  .globe-container canvas {
+    transform: translateX(12%);
+  }
+
+  .globe-scene-content h1 {
+    max-width: 340px;
+    font-size: 2.4rem;
+  }
+
+  .globe-scene-content > p:not(.globe-eyebrow) {
+    max-width: 330px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .globe-legend {
+    margin-top: 1rem;
+  }
 }

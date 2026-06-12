@@ -131,7 +131,7 @@ const TripPreferencesForm = ({
   return (
     <section className="container py-5">
       <header className="mb-4">
-        <h1>Build your trip brief</h1>
+        <h2>Build your trip brief</h2>
         <p>
           Tell us what you have in mind. Whether you are planning a day trip or
           a journey around the globe, we can help.
