@@ -29,7 +29,7 @@ function App() {
               <Route path="/ourdestinations" element={<OurDestinations />} />
               <Route path="/bespoke" element={<BespokeTrip />} />
               <Route path="/contact" element={<ContactForm />} />
-              <Route path="ShortlistPage" element={<ShortlistPage/>}/>
+              <Route path="/shortlist" element={<ShortlistPage />} />
             </Routes>
           </Suspense>
         </div>

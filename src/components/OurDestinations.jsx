@@ -129,7 +129,7 @@ const OurDestination = () => {
         </div>
 
         <Link
-          to="/ShortlistPage"
+          to="/shortlist"
           className="catalog-shortlist-link"
           aria-label={`View shortlist with ${savedDestinationIds.length} saved destinations`}
         >
@@ -195,7 +195,7 @@ const OurDestination = () => {
             <i className="bi bi-search" aria-hidden="true" />
             <h2 className="h4 mt-3">No destinations found</h2>
             <p className="text-body-secondary">
-            No destinations match those filters yet.
+              No destinations match those filters yet.
             </p>
             <button
               className="btn btn-outline-secondary"
