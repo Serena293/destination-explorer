@@ -8,6 +8,7 @@ import "./index.css";
 
 import OurDestinations from "./components/OurDestinations";
 import ContactForm from "./components/ContactForm";
+import ShortlistPage from "./pages/ShortlistPage";
 
 const BespokeTrip = lazy(() => import("./components/BespokeTrip"));
 
@@ -28,6 +29,7 @@ function App() {
               <Route path="/ourdestinations" element={<OurDestinations />} />
               <Route path="/bespoke" element={<BespokeTrip />} />
               <Route path="/contact" element={<ContactForm />} />
+              <Route path="ShortlistPage" element={<ShortlistPage/>}/>
             </Routes>
           </Suspense>
         </div>

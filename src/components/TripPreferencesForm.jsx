@@ -155,8 +155,8 @@ const TripPreferencesForm = ({
               }}
               id="departure"
               required
-              aria-invalid={Boolean(errors.departure)}
-              aria-describedby={
+              ariaInvalid={Boolean(errors.departure)}
+              ariaDescribedBy={
                 errors.departure ? "departure-error" : undefined
               }
             />
@@ -173,8 +173,8 @@ const TripPreferencesForm = ({
               onChange={setDestination}
               disabled={flexibleDestination}
               id="destination"
-              aria-invalid={Boolean(errors.destination)}
-              aria-describedby={
+              ariaInvalid={Boolean(errors.destination)}
+              ariaDescribedBy={
                 errors.destination ? "destination-error" : undefined
               }
             />
@@ -195,7 +195,15 @@ const TripPreferencesForm = ({
               type="checkbox"
               id="flexible-destination"
               checked={flexibleDestination}
-              onChange={(event) => setFlexibleDestination(event.target.checked)}
+              onChange={(event) => {
+                const isFlexible = event.target.checked;
+                setFlexibleDestination(isFlexible);
+
+                if (isFlexible) {
+                  setDestination(null);
+                  clearError("destination");
+                }
+              }}
             />
             <label className="form-check-label" htmlFor="flexible-destination">
               I am flexible about the destination
@@ -262,7 +270,8 @@ const TripPreferencesForm = ({
 
                 setFlexibleDates(isFlexible);
                 if (isFlexible) {
-                  setDepartureDate(null);
+                  setDepartureDate("");
+                  clearError("departureDate");
                 }
               }}
             />
