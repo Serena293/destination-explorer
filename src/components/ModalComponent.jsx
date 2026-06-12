@@ -11,6 +11,7 @@ const ModalComponent = ({ destination, onClose, isSaved, onToggleSave }) => {
             src={destination.imageUrl}
             className="w-100 mt-2"
             style={{ maxHeight: "200px", objectFit: "contain" }}
+            alt={`${destination.name}, ${destination.country}`}
           />
         </div>
       </Modal.Header>
@@ -26,7 +27,7 @@ const ModalComponent = ({ destination, onClose, isSaved, onToggleSave }) => {
 
           <p>
             {" "}
-            <strong>Mood:</strong>
+            <strong>Mood:</strong>{" "}
             {destination.mood.join(", ")}
           </p>
         </div>

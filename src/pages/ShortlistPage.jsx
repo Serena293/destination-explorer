@@ -1,6 +1,6 @@
 import CardComponent from "../components/CardComponent";
 import { getAllDestinations } from "../services/destinationService";
-import { useShortlist } from "../context/shortlistContext";
+import { useShortlist } from "../context/ShortlistContext";
 import { useState } from "react";
 import ModalComponent from "../components/ModalComponent";
 

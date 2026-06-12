@@ -10,7 +10,7 @@ const CitySearchField = ({
   disabled = false,
   required = false,
   ariaInvalid,
-  ariaDescribedby,
+  ariaDescribedBy,
 }) => {
   const [query, setQuery] = useState(
     value ? `${value.name}, ${value.country}` : "",
@@ -74,7 +74,7 @@ const CitySearchField = ({
           aria-describedby={
             [
               helpText ? `${id}-help` : null,
-              ariaDescribedby,
+              ariaDescribedBy,
               error ? `${id}-internal-error` : null,
             ]
               .filter(Boolean)

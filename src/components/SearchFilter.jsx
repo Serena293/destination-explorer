@@ -1,8 +1,14 @@
 import { useState } from "react";
-import { Button, Offcanvas, Card } from "react-bootstrap";
+import { Button, Offcanvas } from "react-bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
+const SearchFilter = ({
+  filters,
+  onChange,
+  onApply,
+  onReset,
+  activeFilterCount,
+}) => {
   const [show, setShow] = useState(false);
 
   const availableMoods = [
@@ -44,33 +50,35 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
           <Offcanvas.Title>Filters</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Card className="border-0">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                onApply();
-              }}
-            >
-              {/* Search input */}
-              <div className="mb-3">
-                <h5 className="mb-2">Search Destinations</h5>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search by name or description..."
-                  value={filters.search}
-                  onChange={(e) =>
-                    onChange({ ...filters, search: e.target.value })
-                  }
-                />
-              </div>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              onApply();
+              setShow(false);
+            }}
+          >
+            <div className="mb-4">
+              <label className="form-label fw-semibold" htmlFor="filter-search">
+                Search destinations
+              </label>
+              <input
+                id="filter-search"
+                type="search"
+                className="form-control"
+                placeholder="Name, country, or description"
+                value={filters.search}
+                onChange={(event) =>
+                  onChange({ ...filters, search: event.target.value })
+                }
+              />
+            </div>
 
+            <fieldset className="mb-4">
+              <legend className="h6">Mood</legend>
               <div className="row">
-                {/* Mood */}
-                <div className="col-md-6 mb-3">
-                  <h5 className="mb-2">Mood</h5>
-                  {availableMoods.map((mood) => (
-                    <div key={mood} className="form-check">
+                {availableMoods.map((mood) => (
+                  <div className="col-6 mb-2" key={mood}>
+                    <div className="form-check">
                       <input
                         className="form-check-input"
                         type="checkbox"
@@ -85,14 +93,17 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
                         {mood.charAt(0).toUpperCase() + mood.slice(1)}
                       </label>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
+              </div>
+            </fieldset>
 
-                {/* Region */}
-                <div className="col-md-6 mb-3">
-                  <h5 className="mb-2">Region</h5>
-                  {availableRegions.map((region) => (
-                    <div key={region} className="form-check">
+            <fieldset className="mb-4">
+              <legend className="h6">Region</legend>
+              <div className="row">
+                {availableRegions.map((region) => (
+                  <div className="col-12 mb-2" key={region}>
+                    <div className="form-check">
                       <input
                         className="form-check-input"
                         type="checkbox"
@@ -107,46 +118,47 @@ const SearchFilter = ({ filters, onChange, onApply, onReset }) => {
                         {region}
                       </label>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
+            </fieldset>
 
-              {/* Buttons */}
-              <div className="d-flex flex-row-reverse mt-3">
-                <Button
-                  variant="outline-secondary"
-                  size="sm"
-                  className="mx-2"
-                  type="button"
-                  onClick={onReset}
-                  disabled={
-                    !filters.mood.length &&
-                    !filters.region.length &&
-                    !filters.search
-                  }
-                >
-                  Reset Filters
-                </Button>
-                <Button
-                  variant="primary"
-                  size="sm"
-                  type="submit"
-                  className="mx-2 "
-                >
-                  Apply Filters
-                </Button>
-              </div>
-            </form>
-          </Card>
+            <div className="d-flex gap-2">
+              <Button
+                variant="primary"
+                type="submit"
+                className="flex-grow-1"
+              >
+                Apply filters
+              </Button>
+              <Button
+                variant="outline-secondary"
+                type="button"
+                onClick={onReset}
+                disabled={
+                  !filters.mood.length &&
+                  !filters.region.length &&
+                  !filters.search
+                }
+              >
+                Reset
+              </Button>
+            </div>
+          </form>
         </Offcanvas.Body>
       </Offcanvas>
-      <div className="mb-3">
-        <div className="text-center mb-2 mt-2">
-          <Button variant="primary" onClick={() => setShow(true)}>
-            <i className="bi bi-funnel"></i> Filters
-          </Button>
-        </div>
-      </div>
+
+      <Button
+        variant="outline-secondary"
+        className="catalog-filter-button"
+        onClick={() => setShow(true)}
+      >
+        <i className="bi bi-funnel" aria-hidden="true" />
+        <span>Filters</span>
+        {activeFilterCount > 0 && (
+          <span className="badge text-bg-secondary">{activeFilterCount}</span>
+        )}
+      </Button>
     </>
   );
 };
