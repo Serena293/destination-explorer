@@ -1,5 +1,7 @@
 # Destination Explorer
 
+Demo: https://destination-explorer-brown.vercel.app/
+
 Destination Explorer is a responsive React travel discovery app that helps
 people explore places, narrow down options, save favourites, and build a
 personalised trip brief.
